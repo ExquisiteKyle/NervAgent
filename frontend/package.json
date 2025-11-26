@@ -1,7 +1,7 @@
 {
-  "name": "agent-nerv-frontend",
+  "name": "little-garden-frontend",
   "version": "1.0.0",
-  "description": "Frontend for Agent NERV - Tutorial Master NPC",
+  "description": "Frontend for Little Garden - AI-powered tutorial RPG",
   "type": "module",
   "scripts": {
     "dev": "vite",
