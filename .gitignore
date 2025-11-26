@@ -94,3 +94,7 @@ htmlcov/
 *.temp
 .cache/
 
+# Vite
+.vite/
+dist/
+
