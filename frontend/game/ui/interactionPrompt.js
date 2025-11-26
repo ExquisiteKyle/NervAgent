@@ -1,6 +1,7 @@
 // Interaction Prompt UI
 import { ENTITY_SIZE, ItemType } from '../gameConstants.js';
 import { gameState } from '../gameState.js';
+import { t } from '../utils/i18n.js';
 
 export function createInteractionPrompt(scene) {
   scene.interactionPrompt = scene.add.text(0, 0, '', {
@@ -31,30 +32,30 @@ export function updateInteractionPrompt(scene, findNearbyEntity) {
   
   if (nearbyEntity.type === 'hestia') {
     entityPos = gameState.hestia.pos;
-    promptText = 'Press E to talk to Hestia';
+    promptText = t('interactions.pressEToTalkToHestia');
   } else if (nearbyEntity.type === 'npc') {
     const npc = nearbyEntity.npc;
     entityPos = npc.pos;
     if (npc.type === 'merchant') {
-      promptText = 'Press E to talk to Merchant';
+      promptText = t('interactions.pressEToTalkToMerchant');
     } else if (npc.type === 'quest_giver') {
-      promptText = 'Press E to talk to Quest Giver';
+      promptText = t('interactions.pressEToTalkToQuestGiver');
     } else {
-      promptText = 'Press E to talk to NPC';
+      promptText = t('interactions.pressEToTalkToNPC');
     }
   } else if (nearbyEntity.type === 'item') {
     const item = nearbyEntity.item;
     entityPos = item.pos;
-    const itemName = item.type === ItemType.POTION ? 'Potion' :
-                    item.type === ItemType.KEY ? 'Key' :
-                    item.type === ItemType.SWORD ? 'Sword' : 'Item';
-    promptText = `Press E to collect ${itemName}`;
+    const itemName = item.type === ItemType.POTION ? t('items.potion') :
+                    item.type === ItemType.KEY ? t('items.key') :
+                    item.type === ItemType.SWORD ? t('items.sword') : t('items.item');
+    promptText = t('interactions.pressEToCollect', { itemName });
   } else if (nearbyEntity.type === 'chest') {
     entityPos = gameState.chestPos;
-    promptText = 'Press E to open Chest';
+    promptText = t('interactions.pressEToOpenChest');
   } else if (nearbyEntity.type === 'enemy') {
     entityPos = gameState.enemyPos;
-    promptText = 'Press E to attack Enemy';
+    promptText = t('interactions.pressEToAttackEnemy');
   }
   
   scene.interactionPrompt.setText(promptText);

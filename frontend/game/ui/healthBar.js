@@ -1,5 +1,6 @@
 // Health Bar UI
 import { gameState } from '../gameState.js';
+import { t } from '../utils/i18n.js';
 
 export function createHealthBar(scene) {
   const panelX = 20;
@@ -61,12 +62,12 @@ export function updateHealthBar(scene) {
   
   // Update HP text
   if (scene.hpText) {
-    scene.hpText.setText(`HP: ${gameState.playerStats.hp}/${gameState.playerStats.maxHP}`);
+    scene.hpText.setText(`${t('ui.hp')}: ${gameState.playerStats.hp}/${gameState.playerStats.maxHP}`);
   }
   
   // Update stats text
   if (scene.statsText) {
-    scene.statsText.setText(`ATK: ${gameState.playerStats.attack} DEF: ${gameState.playerStats.defense}`);
+    scene.statsText.setText(`${t('ui.atk')}: ${gameState.playerStats.attack} ${t('ui.def')}: ${gameState.playerStats.defense}`);
   }
 }
 

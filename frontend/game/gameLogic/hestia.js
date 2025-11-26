@@ -1,6 +1,7 @@
 // Hestia (AI Companion) Logic
 import { showDialogue } from '../dialogue/dialogueBox.js';
 import { gameState } from '../gameState.js';
+import { t } from '../utils/i18n.js';
 
 export function talkToHestia(scene) {
   // Prevent starting new conversation while waiting for AI
@@ -12,7 +13,7 @@ export function talkToHestia(scene) {
   gameState.hestia.hasMessage = false;
   
   // Show loading message while waiting for AI (not dismissible)
-  showDialogue(scene, 'Hestia', 'Connecting to the divine realm...', true);
+  showDialogue(scene, t('hestia.name'), t('hestia.connecting'), true);
   
   // Send event to backend to get Hestia's response
   if (typeof window.requestHestiaDialogue === 'function') {

@@ -4,6 +4,7 @@ import { Colors } from '../gameConstants.js';
 import { gameState, getGameState, updateGameState } from '../gameState.js';
 import { showDialogue as showDialogueFn } from '../dialogue/dialogueBox.js';
 import { highlightTile } from '../gameLogic/highlight.js';
+import { t } from '../utils/i18n.js';
 
 let phaserGame = null;
 
@@ -46,7 +47,7 @@ export function showHestiaSpeech(message) {
   const scene = getGameScene();
   if (scene) {
     // Show AI response as dismissible (isWaitingForAI = false)
-    showDialogueFn(scene, 'Hestia', message, false);
+    showDialogueFn(scene, t('hestia.name'), message, false);
     // Clear the notification after showing message
     gameState.hestia.hasMessage = false;
   }

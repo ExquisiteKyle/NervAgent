@@ -5,6 +5,7 @@ import { showDialogue } from '../dialogue/dialogueBox.js';
 import { showSpeechBubble } from '../dialogue/speechBubbles.js';
 import { showObjectMessage } from '../dialogue/objectMessages.js';
 import { updateInteractionPrompt } from '../ui/interactionPrompt.js';
+import { t } from '../utils/i18n.js';
 
 export function findNearbyEntity(scene) {
   const playerX = gameState.playerPos.x;
@@ -95,7 +96,7 @@ export function handleInteractions(scene, interactionKey, advanceDialogue, talkT
 export function talkToNPC(scene, npc, checkQuestCompletion) {
   // Check if player has learned to interact
   if (!gameState.abilities.canInteract) {
-    showDialogue(scene, '???', 'Hestia hasn\'t taught you how to interact yet. Talk to her first by pressing E near her.', false);
+    showDialogue(scene, t('dialogue.unknownSpeaker'), t('abilities.notLearnedInteract'), false);
     return;
   }
   

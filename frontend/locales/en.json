@@ -2,6 +2,67 @@
   "INITIAL_GREETING": "Greetings, adventurer! I am Hestia, your guide in this realm. I sense you're new to these lands. Fear not—I'll teach you the ways of movement, interaction, and combat. Ready to begin your journey?",
   "ERROR_MESSAGE": "Sorry, I encountered an error. Please try again.",
   "PROGRESS_PREFIX": "Progress:",
-  "PROGRESS_SUFFIX": "objectives"
+  "PROGRESS_SUFFIX": "objectives",
+  
+  "ui": {
+    "pressE": "Press E",
+    "hp": "HP",
+    "atk": "ATK",
+    "def": "DEF"
+  },
+  
+  "interactions": {
+    "pressEToTalkToHestia": "Press E to talk to Hestia",
+    "pressEToTalkToMerchant": "Press E to talk to Merchant",
+    "pressEToTalkToQuestGiver": "Press E to talk to Quest Giver",
+    "pressEToTalkToNPC": "Press E to talk to NPC",
+    "pressEToCollect": "Press E to collect {itemName}",
+    "pressEToOpenChest": "Press E to open Chest",
+    "pressEToAttackEnemy": "Press E to attack Enemy"
+  },
+  
+  "abilities": {
+    "notLearnedInteract": "Hestia hasn't taught you how to interact yet. Talk to her first by pressing E near her.",
+    "notLearnedCollect": "Hestia hasn't taught you how to collect items yet. Talk to her first by pressing E near her.",
+    "notLearnedOpenChest": "Hestia hasn't taught you how to open chests yet. Talk to her first by pressing E near her.",
+    "notLearnedCombat": "Hestia hasn't taught you combat yet. Talk to her first by pressing E near her."
+  },
+  
+  "items": {
+    "potion": "Potion",
+    "key": "Key",
+    "sword": "Sword",
+    "shield": "Shield",
+    "item": "Item",
+    "inventoryFull": "Inventory full!",
+    "inventoryEmpty": "Inventory is empty!",
+    "inventory": "Inventory: {items}",
+    "collected": "You collected a {itemType}!",
+    "collectedSword": "You collected a {itemType}!\nAttack +5",
+    "collectedShield": "You collected a {itemType}!\nDefense +3",
+    "noPotions": "No potions in inventory!",
+    "usedPotion": "Used potion! Healed {amount} HP"
+  },
+  
+  "combat": {
+    "chestLocked": "Chest is locked!\nYou need a key.",
+    "chestOpened": "Chest opened!\nFound {gold} gold!",
+    "enemyDefeated": "Enemy defeated! Quest completed!",
+    "enemyHP": "Enemy HP: {currentHP}/100 | You took {damage} damage",
+    "defeated": "You are defeated! HP restored to 1."
+  },
+  
+  "hestia": {
+    "name": "Hestia",
+    "connecting": "Connecting to the divine realm...",
+    "readyMessage": "Hestia ready! Press E near her to talk."
+  },
+  
+  "dialogue": {
+    "unknownSpeaker": "???"
+  },
+  
+  "quests": {
+    "defeatEnemy": "Defeat the Enemy"
+  }
 }
-

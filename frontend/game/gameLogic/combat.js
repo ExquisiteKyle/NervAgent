@@ -5,18 +5,19 @@ import { showDialogue } from '../dialogue/dialogueBox.js';
 import { showObjectMessage } from '../dialogue/objectMessages.js';
 import { updateInteractionPrompt } from '../ui/interactionPrompt.js';
 import { findNearbyEntity } from './interactions.js';
+import { t } from '../utils/i18n.js';
 
 export function openChest(scene, checkQuestCompletion, updateUI) {
   // Check if player has learned to open chests
   if (!gameState.abilities.canOpenChest) {
-    showDialogue(scene, '???', 'Hestia hasn\'t taught you how to open chests yet. Talk to her first by pressing E near her.', false);
+    showDialogue(scene, t('dialogue.unknownSpeaker'), t('abilities.notLearnedOpenChest'), false);
     return;
   }
   
   if (gameState.chestRequiresKey) {
     const hasKey = gameState.inventory.some(item => item.type === ItemType.KEY);
     if (!hasKey) {
-      showObjectMessage(scene, gameState.chestPos.x, gameState.chestPos.y, 'Chest is locked!\nYou need a key.');
+      showObjectMessage(scene, gameState.chestPos.x, gameState.chestPos.y, t('combat.chestLocked'));
       return;
     }
     
@@ -28,7 +29,7 @@ export function openChest(scene, checkQuestCompletion, updateUI) {
   scene.chest.setVisible(false);
   
   const gold = 50;
-  showObjectMessage(scene, gameState.chestPos.x, gameState.chestPos.y, `Chest opened!\nFound ${gold} gold!`);
+  showObjectMessage(scene, gameState.chestPos.x, gameState.chestPos.y, t('combat.chestOpened', { gold }));
   updateInteractionPrompt(scene, () => findNearbyEntity(scene));
   checkQuestCompletion();
   
@@ -44,7 +45,7 @@ export function openChest(scene, checkQuestCompletion, updateUI) {
 export function attackEnemy(scene, checkQuestCompletion, showMessage) {
   // Check if player has learned to fight
   if (!gameState.abilities.canFight) {
-    showDialogue(scene, '???', 'Hestia hasn\'t taught you combat yet. Talk to her first by pressing E near her.', false);
+    showDialogue(scene, t('dialogue.unknownSpeaker'), t('abilities.notLearnedCombat'), false);
     return;
   }
   
@@ -56,7 +57,7 @@ export function attackEnemy(scene, checkQuestCompletion, showMessage) {
   
   if (gameState.playerStats.hp <= 0) {
     gameState.playerStats.hp = 1;
-    showMessage('You are defeated! HP restored to 1.');
+    showMessage(t('combat.defeated'));
   }
   
   if (gameState.enemyHP <= 0) {
@@ -68,10 +69,10 @@ export function attackEnemy(scene, checkQuestCompletion, showMessage) {
       quest.completed = true;
     }
     
-    showMessage('Enemy defeated! Quest completed!');
+    showMessage(t('combat.enemyDefeated'));
     checkQuestCompletion();
   } else {
-    showMessage(`Enemy HP: ${gameState.enemyHP}/100 | You took ${enemyDamage} damage`);
+    showMessage(t('combat.enemyHP', { currentHP: gameState.enemyHP, damage: enemyDamage }));
   }
   
   scene.updateUI();

@@ -8,6 +8,7 @@ let conversationStarted = false;
 // Chat UI removed - Hestia now in-game with speech bubbles
 
 const sendInitialMessage = () => {
+    // Note: This console.log doesn't need translation as it's for debugging
     console.log('Hestia ready! Press E near her to talk.');
     conversationStarted = true;
     

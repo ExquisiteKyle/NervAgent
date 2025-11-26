@@ -7,18 +7,19 @@ import { updateInventoryUI } from '../ui/inventory.js';
 import { updateHealthBar } from '../ui/healthBar.js';
 import { updateInteractionPrompt } from '../ui/interactionPrompt.js';
 import { findNearbyEntity } from './interactions.js';
+import { t } from '../utils/i18n.js';
 
 export function collectItem(scene, item, checkQuestCompletion) {
   // Check if player has learned to collect
   if (!gameState.abilities.canCollect) {
-    showDialogue(scene, '???', 'Hestia hasn\'t taught you how to collect items yet. Talk to her first by pressing E near her.', false);
+    showDialogue(scene, t('dialogue.unknownSpeaker'), t('abilities.notLearnedCollect'), false);
     return;
   }
   
   // Find first available slot (1, 2, 3, or 4)
   const maxSlots = 4;
   if (gameState.inventory.length >= maxSlots) {
-    showObjectMessage(scene, gameState.playerPos.x, gameState.playerPos.y, 'Inventory full!');
+    showObjectMessage(scene, gameState.playerPos.x, gameState.playerPos.y, t('items.inventoryFull'));
     return;
   }
   
@@ -31,14 +32,19 @@ export function collectItem(scene, item, checkQuestCompletion) {
   }
   
   let messageText = '';
+  const itemType = item.type === ItemType.SWORD ? t('items.sword') :
+                   item.type === ItemType.SHIELD ? t('items.shield') :
+                   item.type === ItemType.POTION ? t('items.potion') :
+                   item.type === ItemType.KEY ? t('items.key') : item.type;
+  
   if (item.type === ItemType.SWORD) {
     gameState.playerStats.attack += 5;
-    messageText = `You collected a ${item.type}!\nAttack +5`;
+    messageText = t('items.collectedSword', { itemType });
   } else if (item.type === ItemType.SHIELD) {
     gameState.playerStats.defense += 3;
-    messageText = `You collected a ${item.type}!\nDefense +3`;
+    messageText = t('items.collectedShield', { itemType });
   } else {
-    messageText = `You collected a ${item.type}!`;
+    messageText = t('items.collected', { itemType });
   }
   
   showObjectMessage(scene, item.pos.x, item.pos.y, messageText);
@@ -61,7 +67,7 @@ export function collectItem(scene, item, checkQuestCompletion) {
 export function usePotion(scene, showMessage, updateUI) {
   const potionIndex = gameState.inventory.findIndex(item => item.type === ItemType.POTION);
   if (potionIndex === -1) {
-    showMessage('No potions in inventory!');
+    showMessage(t('items.noPotions'));
     return;
   }
   
@@ -71,17 +77,22 @@ export function usePotion(scene, showMessage, updateUI) {
     gameState.playerStats.maxHP,
     gameState.playerStats.hp + healAmount
   );
-  showMessage(`Used potion! Healed ${healAmount} HP`);
+  showMessage(t('items.usedPotion', { amount: healAmount }));
   updateUI(scene);
 }
 
 export function showInventory(scene, showMessage) {
   if (gameState.inventory.length === 0) {
-    showMessage('Inventory is empty!');
+    showMessage(t('items.inventoryEmpty'));
     return;
   }
   
-  const items = gameState.inventory.map(item => item.type).join(', ');
-  showMessage(`Inventory: ${items}`);
+  const items = gameState.inventory.map(item => {
+    if (item.type === ItemType.POTION) return t('items.potion');
+    if (item.type === ItemType.KEY) return t('items.key');
+    if (item.type === ItemType.SWORD) return t('items.sword');
+    return item.type;
+  }).join(', ');
+  showMessage(t('items.inventory', { items }));
 }
 

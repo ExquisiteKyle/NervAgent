@@ -1,4 +1,6 @@
 // Dialogue Box System
+import { t } from '../utils/i18n.js';
+
 export function createDialogueBox(scene) {
   const boxWidth = Math.min(600, scene.scale.width - 40);  // Responsive width
   const boxHeight = 120;
@@ -31,7 +33,7 @@ export function createDialogueBox(scene) {
   nameBox.setScrollFactor(0);
   
   // Speaker name text
-  scene.dialogueSpeaker = scene.add.text(nameBoxWidth / 2, -nameBoxHeight / 2, 'Hestia', {
+  scene.dialogueSpeaker = scene.add.text(nameBoxWidth / 2, -nameBoxHeight / 2, t('hestia.name'), {
     fontSize: '16px',
     color: '#ffffff',
     fontStyle: 'bold'
@@ -46,7 +48,7 @@ export function createDialogueBox(scene) {
   }).setScrollFactor(0);
   
   // Continue indicator (Press E)
-  scene.dialogueContinue = scene.add.text(boxWidth - 80, boxHeight - 30, 'Press E', {
+  scene.dialogueContinue = scene.add.text(boxWidth - 80, boxHeight - 30, t('ui.pressE'), {
     fontSize: '14px',
     color: '#ffffff',
     fontStyle: 'bold'
